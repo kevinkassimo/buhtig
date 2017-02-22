@@ -15,18 +15,18 @@ var server = http.createServer(function(req, res) {
 	
 	if (message['repo'] && message['commit']) {
 		let returnCallback = function(link) {
-			res.writeHead(200, {'content-type': 'text/plain', 'Access-Control-Allow-Origin':'http://www.buhtig.com'});
+			res.writeHead(200, {'content-type': 'text/plain', 'Access-Control-Allow-Origin':'*'});
 			res.write('lnk:' + link);
 			res.end();
 		}
 		let errorHandler = function(err) {
-			res.writeHead(500, {'content-type': 'text/plain', 'Access-Control-Allow-Origin':'http://www.buhtig.com'});
+			res.writeHead(500, {'content-type': 'text/plain', 'Access-Control-Allow-Origin':'*'});
 			res.write('err:' + err);
 			res.end();
 		}
 		reqlib.getNthCommitURL(message['repo'], parseInt(message['commit'], 10), returnCallback, errorHandler);
 	} else {
-		res.writeHead(404, {'content-type': 'text/plain', 'Access-Control-Allow-Origin':'http://www.buhtig.com'});
+		res.writeHead(404, {'content-type': 'text/plain', 'Access-Control-Allow-Origin':'*'});
 		res.write('404 - Not Found');
 		res.end();
 	}

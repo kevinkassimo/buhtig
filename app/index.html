@@ -29,6 +29,19 @@
 			font-size: 30px; 
 			font-family: 'collegia';
 		}
+
+		.footer {
+  			position: absolute;
+  			bottom: 0;
+  			width: 100%;
+  			/* Set the fixed height of the footer here */
+  			height: 60px;
+  			background-color: #f5f5f5;
+		}
+
+		.container .text-muted {
+  			margin: 20px 0;
+		}
 	</style>
 </head>
 <body>
@@ -53,19 +66,29 @@
 	<div id="buhtig-link-error" class="collegia-medium" style="display: none;"></div>
 </div>
 <div class="container">
-		<br>
-		<div class="row">
-    		<div class="col-xs-12 col-sm-4 col-md-2 col-md-offset-2">
-        		<button class="btn btn-warning btn-block btn-lg buhtig-search" id="buhtig-search-prev" disabled="true">Prev Commit</button>
-    		</div>
-    		<div class="col-xs-12 col-sm-4 col-md-4">
-        		<button class="btn btn-primary btn-block btn-lg buhtig-search" id="buhtig-search-curr" disabled="true">GO!</button>
-    		</div>
-    		<div class="col-xs-12 col-sm-4 col-md-2">
-        		<button class="btn btn-success btn-block btn-lg buhtig-search" id="buhtig-search-next" disabled="true">Next Commit</button>
-    		</div>
-		</div>
+	<br>
+	<div class="row">
+    	<div class="col-xs-12 col-sm-4 col-md-2 col-md-offset-2">
+        	<button class="btn btn-warning btn-block btn-lg buhtig-search" id="buhtig-search-prev" disabled="true">Prev Commit</button>
+    	</div>
+    	<div class="col-xs-12 col-sm-4 col-md-4">
+        	<button class="btn btn-primary btn-block btn-lg buhtig-search" id="buhtig-search-curr" disabled="true">GO!</button>
+    	</div>
+    	<div class="col-xs-12 col-sm-4 col-md-2">
+        	<button class="btn btn-success btn-block btn-lg buhtig-search" id="buhtig-search-next" disabled="true">Next Commit</button>
+    	</div>
 	</div>
+</div>
+<footer class="footer">
+	<div class="container">
+		<!-- <div class="row"> -->
+			<p class="text-muted">
+				<span>Hosted by @kevinkassimo ღღღ</span>
+				<a class="text-muted" href="https://github.com/kevinkassimo/buhtig" style="text-align: right;">Visit GitHub Repo</p>
+			</p>
+		<!-- </div> -->
+	</div>
+</footer>
 
 <script type="text/javascript">
 	const SERVER_URL = 'http://192.241.229.194:100/';
@@ -134,7 +157,7 @@
 			let repo = formatRepo($("#buhtig-repo-input").val());
 
         	var xhr = new XMLHttpRequest();
-        	console.log(`${SERVER_URL}?repo=${repo.replace(/\//g, '%2F')}&commit=${$("#buhtig-commit-input input").val()}`);
+        	//console.log(`${SERVER_URL}?repo=${repo.replace(/\//g, '%2F')}&commit=${$("#buhtig-commit-input input").val()}`);
 			xhr.open("GET", `${SERVER_URL}?repo=${repo.replace(/\//g, '%2F')}&commit=${$("#buhtig-commit-input input").val()}`, true);
 
 			xhr.send();
@@ -142,10 +165,10 @@
 			xhr.onreadystatechange = function() {
 	  			if (xhr.readyState == 4) {
 	  				let data = xhr.responseText;
-	  				console.log('data');
+	  				//console.log('data');
         			if (data.substring(0, 4) === 'lnk:') {
         				let lnk = data.substring(4, data.length);
-        				console.log(lnk);
+        				//console.log(lnk);
         				$('#buhtig-gen-link a').prop("href", lnk);
         				$('#buhtig-gen-link').show();
         				window.open(lnk);

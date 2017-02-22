@@ -8,12 +8,12 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="css/style.css">
+	<!-- <link rel="stylesheet" href="css/style.css"> -->
 
 	<style type="text/css">
 		@font-face {
     		font-family: 'collegia';
-    		src: url('../fonts/collegia.ttf') format('truetype');
+    		src: url('http://192.241.229.194/fonts/collegia.ttf') format('truetype');
     		font-weight: normal;
     		font-style: normal;
 		}
@@ -21,13 +21,13 @@
 		.collegia-huge {
 			text-align: center; 
 			font-size: 150px; 
-			font-family: collegia;
+			font-family: 'collegia';
 		}
 
 		.collegia-medium {
 			text-align: center; 
 			font-size: 30px; 
-			font-family: collegia;
+			font-family: 'collegia';
 		}
 	</style>
 </head>
@@ -130,9 +130,8 @@
 			}
 		});
 
-        $('#buhtig-search-curr').click(function() {
-        	console.log("used!!!!");
-        	let repo = formatRepo($("#buhtig-repo-input").val());
+		function requestXML() {
+			let repo = formatRepo($("#buhtig-repo-input").val());
 
         	var xhr = new XMLHttpRequest();
         	console.log(`${SERVER_URL}?repo=${repo.replace(/\//g, '%2F')}&commit=${$("#buhtig-commit-input input").val()}`);
@@ -149,6 +148,7 @@
         				console.log(lnk);
         				$('#buhtig-gen-link a').prop("href", lnk);
         				$('#buhtig-gen-link').show();
+        				window.open(lnk);
         			} else if (data.substring(0, 4) === 'err:') {
         				let errCode = parseInt(data.substring(4, data.length));
         				switch (errCode) {
@@ -170,68 +170,28 @@
 	  				return data;
 	  			}
 			}
+		}
 
-        // 	$.ajax({
-        // 		async: false,
-     			// type: 'GET',
-     			// url: 'http://localhost/play.php',
-     			// success: function(data) {
-     			// 	console.log('data');
-        // 			if (data.substring(0, 4) === 'lnk:') {
-        // 				let lnk = data.substring(4, data.length);
-        // 				console.log(lnk);
-        // 				$('#buhtig-gen-link a').prop("href", lnk);
-        // 				$('#buhtig-gen-link').show();
-        // 			} else if (data.substring(0, 4) === 'err:') {
-        // 				let errCode = parseInt(data.substring(4, data.length));
-        // 				switch (errCode) {
-        // 					case -1: // Not a valid repository
-        // 						$('#buhtig-link-error').text('Not a valid repository!');
-        // 						break;
-        // 					case -2: // Not a valid commit number
-        // 						$('#buhtig-link-error').text('Not a valid commit number!');
-        // 						break;
-        // 					case -3: // Request max reached
-        // 						$('#buhtig-link-error').text('Rate Limit Max reached. Wait 1 hour and retry');
-        // 						break;
-        // 					default: // Unknown error
-        // 						$('#buhtig-link-error').text('Unknown server error');
-        // 						break;
-        // 				}
-        // 				$('#buhtig-link-error').show();
-        // 			} //else do nothing
-        //   		}
-        // 	});
-       //  	$.get(`${SERVER_URL}?repo=${repo.replace(/\//g, '%2F')}&commit=${$("#buhtig-commit-input input").val()}`, function(data) {
-       //  			console.log('data');
-       //  			if (data.substring(0, 4) === 'lnk:') {
-       //  				let lnk = data.substring(4, data.length);
-       //  				console.log(lnk);
-       //  				$('#buhtig-gen-link a').prop("href", lnk);
-       //  				$('#buhtig-gen-link').show();
-       //  			} else if (data.substring(0, 4) === 'err:') {
-       //  				let errCode = parseInt(data.substring(4, data.length));
-       //  				switch (errCode) {
-       //  					case -1: // Not a valid repository
-       //  						$('#buhtig-link-error').text('Not a valid repository!');
-       //  						break;
-       //  					case -2: // Not a valid commit number
-       //  						$('#buhtig-link-error').text('Not a valid commit number!');
-       //  						break;
-       //  					case -3: // Request max reached
-       //  						$('#buhtig-link-error').text('Rate Limit Max reached. Wait 1 hour and retry');
-       //  						break;
-       //  					default: // Unknown error
-       //  						$('#buhtig-link-error').text('Unknown server error');
-       //  						break;
-       //  				}
-       //  				$('#buhtig-link-error').show();
-       //  			} //else do nothing
-       //  		}).fail(function() {
-    			// 	console.error('Server Error');
-    			// });
-  			});
-        });
+        $('#buhtig-search-curr').click(function() {
+        	requestXML();
+  		});
+        $('#buhtig-search-prev').click(function() {
+        	let currCommit = $("#buhtig-commit-input input").val();
+        	let prevCommit = parseInt(currCommit) - 1;
+        	if (prevCommit <= 0) {
+        		$('#buhtig-link-error').text('No previous commit!');
+        	} else {
+        		$("#buhtig-commit-input input").val(prevCommit.toString());
+        		requestXML();
+        	}
+  		});
+  		$('#buhtig-search-next').click(function() {
+  			let currCommit = $("#buhtig-commit-input input").val();
+        	let nextCommit = parseInt(currCommit) + 1;
+        	$("#buhtig-commit-input input").val(nextCommit.toString());
+        	requestXML();
+  		});
+    });
 </script>
 
 </body>

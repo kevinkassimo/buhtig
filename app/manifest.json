@@ -1,0 +1,10 @@
+{
+  "manifest_version": 2,
+  "name": "buHtiG",
+  "permissions": [
+    "http://192.241.229.194:100/"
+  ],
+  "web_accessible_resources": [
+    "http://192.241.229.194:100/"
+  ] 
+}

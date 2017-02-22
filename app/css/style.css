@@ -1,0 +1,33 @@
+@font-face {
+    font-family: 'collegia';
+    src: url('../fonts/collegia.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.collegia-huge {
+	text-align: center; 
+	font-size: 150px; 
+	font-family: collegia;
+}
+
+.collegia-medium {
+	text-align: center; 
+	font-size: 30px; 
+	font-family: collegia;
+}
+
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+.buhtig-center {
+  width: 50%;
+  height: 50%;
+  /*overflow: auto;*/
+  margin: auto;
+  /*position: absolute;*/
+  top: 0; left: 0; bottom: 0; right: 0;
+}

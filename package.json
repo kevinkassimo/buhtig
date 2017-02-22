@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "express": "^4.14.1",
+    "jquery": "^3.1.1",
+    "jsdom": "^9.11.0",
+    "node-fetch": "^1.6.3"
+  }
+}

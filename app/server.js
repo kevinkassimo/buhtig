@@ -3,11 +3,16 @@ var reqlib = require('../lib/req.js');
 var errorcode = require('../lib/errorcode.js');
 var querystring = require('querystring');
 var url = require('url');
+var fs = require('fs');
 var express = require('express');
 
 var app = express();
 
 var server = http.createServer(function(req, res) {
+    var logging = fs.open("traffic.log", "a+", function(err, fd) {
+		fs.writeSync(fd, req.url.toString() + "\n");
+    });
+    
 	var query = url.parse(req.url).query;
 	//query looks like ?repo=expressjs/express&commit=1
 	var message = querystring.parse(query);
@@ -30,6 +35,6 @@ var server = http.createServer(function(req, res) {
 		res.write('404 - Not Found');
 		res.end();
 	}
-}).listen(100);
+}).listen(10000);
 
 console.log('Server starts.');

@@ -1,3 +1,4 @@
 node_modules/*
 client/auth.js
 app/fonts/*
+app/traffic.log

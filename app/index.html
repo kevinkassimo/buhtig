@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>buHtiG</title>
+	<title>buHtiG: Goto N-th Commit of GitHub Repositories</title>
 	<!--jQuery-->
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 	<!--BOOTSTRAP-->
@@ -46,9 +46,11 @@
 </head>
 <body>
 
+<a href="https://github.com/kevinkassimo/buhtig"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
+  
 <div class="container-fluid text-center">
 	<h1 class="collegia-huge" style="margin-top: 10%;">buHtiG</h1>
-	<h4 class="collegia-medium">Goto n-th commit of GitHub Repository</h4>
+	<h4 class="collegia-medium">Goto n-th commit of GitHub Repositories</h4>
 	<div class="input-group input-group-lg col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2">
   		<span class="input-group-addon" id="sizing-addon1">@ Repository</span>
   		<input type="text" class="form-control" placeholder="SomeUser/SomeRepo" aria-describedby="sizing-addon1" id="buhtig-repo-input">
@@ -83,15 +85,15 @@
 	<div class="container">
 		<!-- <div class="row"> -->
 			<p class="text-muted">
-				<span>Hosted by @kevinkassimo ღღღ</span>
-				<a class="text-muted" href="https://github.com/kevinkassimo/buhtig" style="text-align: right;">Visit GitHub Repo</p>
+				<span>Hosted by @kevinkassimo ~@~@~@~@~ </span>
+				<a class="text-muted" href="https://github.com/kevinkassimo/buhtig" style="text-align: right; font-weight: bold;">Visit GitHub Repo</p>
 			</p>
 		<!-- </div> -->
 	</div>
 </footer>
 
 <script type="text/javascript">
-	const SERVER_URL = 'http://192.241.229.194:100/';
+	const SERVER_URL = 'http://192.241.229.194:10000/';
 
 	function isValidRepoName(str) {
 		let hasSlash = false;
@@ -112,7 +114,7 @@
 	}
 	function formatRepo(str) {
 		let newStr = str;
-		if (newStr[1] === '/') {
+		if (newStr[0] === '/') {
 			newStr = newStr.substring(1, newStr.length);
 		}
 		if (newStr[newStr.length-1] === '/') {
